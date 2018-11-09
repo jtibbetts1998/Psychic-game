@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Psychic game</title>
+
+  </head>
+  <body>
+
+      <div id="game">
+            <h1>The Psychic Game</h1>
+            <p>Guess what letter I'm thinking of! </p>
+            <!-- Show's the letter they picked -->
+            <p id="userchoice-text"></p>
+            <!-- Show's the computers choice -->
+            <p id="computerchoice-text"></p>
+            <p id="wins"></p>
+                <p><span id="wins"></span></p>
+            <p id="losses-text"></p>
+                <p><span id="losses-text"></span></p>
+                <p>Guesses left: <span id="numGuesses"></span></p> 
+                <p>Your Guesses so far: <span id="guessesSoFar"></span></p>
+      </div>
+
+      <script type="text/JavaScript">
+
+      var computerChoices= ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      
+      var wins = 0;
+      var losses = 0;
+      var numGuesses = 9;
+      var userChoices = 0;
+      var guessesSoFar = [];
+     
+      
+      var directionsText = document.getElementById("directions-text");
+      var userChoiceText = document.getElementById("userchoice-text");
+      var computerChoiceText = document.getElementById("computerchoice-text");
+      var winsText = document.getElementById("wins");
+      var lossesText = document.getElementById("losses-text");
+      var numGuessesDisplay = document.getElementById("numGuesses");
+      var guesses = document.getElementById("guessesSoFar");
+
+        //When the user starts the game get the press of the button
+        document.onkeyup = function (event) {
+
+            //Get the letter that user picked
+            var userChoice = event.key
+            console.log(userChoice);
+
+            //Add the letter to the guessed so far array
+            guessesSoFar.push(userChoice);
+            console.log(guessesSoFar);
+
+            //Add the guesses to the page
+            guesses.textContent = guessesSoFar;
+
+            //
+            userChoiceText.textContent = "You chose: " + userChoice;
+
+            //Get the letter that the computer picked
+            var comChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            console.log(comChoice);
+
+            //Update the page with the letters that were picked
+            computerChoiceText.textContent = "The computer chose: " + comChoice;
+             
+            //See if the letters are the same
+            if (userChoice === comChoice) {
+                wins++;
+                winsText.innerHTML = wins;
+                console.log("You Win");
+            }  else {
+                losses++;
+                numGuesses--;
+                numGuessesDisplay.innerHTML = numGuesses;
+                console.log(numGuesses);
+            }
+
+         
+         
+         winsText.textContent = "wins: " + wins;
+         lossesText.textContent = "losses: " + losses;
+
+        };
+
+      </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
