@@ -48,11 +48,21 @@
       var numGuessesDisplay = document.getElementById("numGuesses");
       var guesses = document.getElementById("guessesSoFar");
 
+      function reset(){
+          numGuesses = 9;
+          guessesSoFar = [];
+
+      }
+
+        //Get the letter that the computer picked
+        var comChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            console.log(comChoice);
+
         //When the user starts the game get the press of the button
         document.onkeyup = function (event) {
 
             //Get the letter that user picked
-            var userChoice = event.key
+            var userChoice = event.key;
             console.log(userChoice);
 
             //Add the letter to the guessed so far array
@@ -65,9 +75,7 @@
             //Update page with letter that user picked
             userChoiceText.textContent = "You chose: " + userChoice;
 
-            //Get the letter that the computer picked
-            var comChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-            console.log(comChoice);
+          
 
             //Update the page with the letters that were picked
             computerChoiceText.textContent = "The computer chose: " + comChoice;
@@ -77,11 +85,21 @@
                 wins++;
                 winsText.innerHTML = wins;
                 console.log("You Win");
-            }  else {
+                reset();
+                }
+            if (numGuesses === 0 ){
                 losses++;
-                numGuesses--;
+                numGuessesDisplay.innerHTML = losses;
+                reset();
+                //             
                 numGuessesDisplay.innerHTML = numGuesses;
-                console.log(numGuesses);
+
+            }
+
+              else {
+                 numGuesses--;
+                 numGuessesDisplay.innerHTML = numGuesses;
+                 console.log(numGuesses);
 
             }   
 
@@ -91,6 +109,7 @@
          lossesText.textContent = "losses: " + losses;
 
         };
+       
 
       </script>
 
